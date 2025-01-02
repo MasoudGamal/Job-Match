@@ -1,4 +1,4 @@
-package org.springdemo.serviceproviders.admin.dto;
+package org.springdemo.serviceproviders.factor.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -11,17 +11,20 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AdminRequest {
+public class FactorRequest {
 
     private int id;
     @NotBlank
     private String userName;
-    @Email
-    private String email;
     @NotBlank
     private String password;
     @NotBlank
     private String phoneNumber;
     @NotBlank
     private String role;
+    @NotBlank
+    private String service;
+    @NotBlank
+    private String address;
+    private int age;
 }

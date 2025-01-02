@@ -1,8 +1,6 @@
-package org.springdemo.serviceproviders.admin.dto;
+package org.springdemo.serviceproviders.factor.dto;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,9 +10,12 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AdminResponse {
+public class FactorResponse {
 
     private int id ;
     private String userName;
+    private String service;
+    private String address;
+    private int age;
 
 }

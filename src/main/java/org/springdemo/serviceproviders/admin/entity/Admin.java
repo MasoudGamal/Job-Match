@@ -10,7 +10,6 @@ import org.springdemo.serviceproviders.user.User;
 @Setter
 @AllArgsConstructor
 //@NoArgsConstructor
-@Builder
 @Table(name = "admins")
 public class Admin extends User {
 
