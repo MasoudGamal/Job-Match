@@ -13,7 +13,7 @@ import org.springdemo.serviceproviders.user.User;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "factors")
+@Table(name = "clients")
 public class Client extends User {
 
     private String address;

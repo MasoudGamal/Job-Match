@@ -30,6 +30,7 @@ public class ClientMapper {
                 .orElseThrow(() -> new RoleNotFundException("Role Not Fund  : "));
 
         Client client = new Client();
+        client.setEmail(clientRequest.getEmail());
         client.setId(clientRequest.getId());
         client.setPassword(passwordEncoder.encode(clientRequest.getPassword()));
         client.setUserName(clientRequest.getUserName());

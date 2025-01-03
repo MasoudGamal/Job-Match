@@ -1,5 +1,6 @@
 package org.springdemo.serviceproviders.client.dto;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,6 +16,8 @@ public class ClientRequest {
     private int id;
     @NotBlank
     private String userName;
+    @Email
+    private String email;
     @NotBlank
     private String password;
     @NotBlank

@@ -39,6 +39,7 @@ public class WorkerMapper {
         worker.setAddress(workerRequest.getAddress());
         worker.setAge(workerRequest.getAge());
         worker.setService(workerRequest.getService());
+        worker.setEmail(workerRequest.getEmail());
 
         return worker;
     }
