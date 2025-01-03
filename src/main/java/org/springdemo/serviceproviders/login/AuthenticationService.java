@@ -2,11 +2,14 @@ package org.springdemo.serviceproviders.login;
 
 import lombok.RequiredArgsConstructor;
 import org.springdemo.serviceproviders.security.JwtService;
+import org.springdemo.serviceproviders.user.Role;
 import org.springdemo.serviceproviders.user.User;
 
 import org.springdemo.serviceproviders.user.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -27,6 +30,7 @@ public class AuthenticationService {
 
         if (passwordEncoder.matches(loginRequestDto.getPassword(), user.getPassword()) ) {
             LoginResponseDto loginResponseDto = new LoginResponseDto();
+            loginResponseDto.setRole(user.getRoles().stream().map(Role::getRole).collect(Collectors.toSet()));
             loginResponseDto.setId(user.getId());
             loginResponseDto.setUserName(user.getUsername());
             loginResponseDto.setToken(jwtService.generateToken(user));
