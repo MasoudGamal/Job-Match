@@ -30,7 +30,7 @@ public class AdminService {
     public AdminResponse create(AdminRequest adminRequest){
 
         if (adminRepository.findByUserName(adminRequest.getUserName()).isPresent()){
-                throw  new AdminAlreadyExistsException("Factor Already Exists  : ");
+                throw  new AdminAlreadyExistsException("Client Already Exists  : ");
         }
 
         Admin admin = adminMapper.requestToAdmin(adminRequest);
@@ -43,7 +43,7 @@ public class AdminService {
     public AdminResponse findById(Integer id){
 
         Admin admin = adminRepository.findById(id)
-                .orElseThrow(() -> new AdminNotFundException("Factor Not Fund : "));
+                .orElseThrow(() -> new AdminNotFundException("Client Not Fund : "));
 
         return adminMapper.adminToResponse(admin);
     }
@@ -64,7 +64,7 @@ public class AdminService {
 
     public void delete(Integer id){
         Admin admin = adminRepository.findById(id)
-                .orElseThrow(() -> new AdminNotFundException("Factor Not Fund : "));
+                .orElseThrow(() -> new AdminNotFundException("Client Not Fund : "));
 
         adminRepository.delete(admin);
     }
@@ -74,7 +74,7 @@ public class AdminService {
     public AdminResponse update(AdminRequest adminRequest ){
 
         Admin admin = adminRepository.findById(adminRequest.getId())
-                .orElseThrow(() -> new AdminNotFundException("Factor Not Fund : "));
+                .orElseThrow(() -> new AdminNotFundException("Client Not Fund : "));
 
         Admin admin1 = adminMapper.requestToAdmin(adminRequest);
 

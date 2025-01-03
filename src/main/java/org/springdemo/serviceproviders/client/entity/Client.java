@@ -1,4 +1,4 @@
-package org.springdemo.serviceproviders.factor.entity;
+package org.springdemo.serviceproviders.client.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -14,9 +14,7 @@ import org.springdemo.serviceproviders.user.User;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "factors")
-public class Factor extends User {
+public class Client extends User {
 
-    private String service;
     private String address;
-    private int age;
 }

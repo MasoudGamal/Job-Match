@@ -1,21 +1,22 @@
-package org.springdemo.serviceproviders.factor.dto;
+package org.springdemo.serviceproviders.worker.entity;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springdemo.serviceproviders.user.User;
 
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FactorResponse {
+@Table(name = "worker")
+public class Worker extends User {
 
-    private int id ;
-    private String userName;
     private String service;
     private String address;
     private int age;
-
 }

@@ -1,6 +1,5 @@
-package org.springdemo.serviceproviders.factor.dto;
+package org.springdemo.serviceproviders.client.dto;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,7 +10,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class FactorRequest {
+public class ClientRequest {
 
     private int id;
     @NotBlank
@@ -23,8 +22,5 @@ public class FactorRequest {
     @NotBlank
     private String role;
     @NotBlank
-    private String service;
-    @NotBlank
     private String address;
-    private int age;
 }
