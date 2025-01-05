@@ -1,5 +1,6 @@
 package org.springdemo.serviceproviders.job.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,11 +30,13 @@ public class Job {
 
     private Double price;
 
-    @OneToOne
+    @ManyToOne
     private Worker worker ;
 
 
     @ManyToOne
+//    @JsonBackReference
+
 //    @JoinColumn(name = "category_id")
     private Category category;
 

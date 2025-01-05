@@ -27,6 +27,7 @@ public class CategoryMapper {
         Category category = new Category();
         category.setName(categoryRequest.getName());
 
+
         return category;
 
 
@@ -50,7 +51,7 @@ public class CategoryMapper {
         CategoryResponse categoryResponse = new CategoryResponse();
         categoryResponse.setId(category.getId());
         categoryResponse.setName(category.getName());
-        categoryResponse.setWorkers(category.getWorkers());
+        categoryResponse.setJobs(category.getJobs());
 
         return categoryResponse;
     }

@@ -1,5 +1,6 @@
 package org.springdemo.serviceproviders.basics.worker.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springdemo.serviceproviders.basics.worker.dto.WorkerRequest;
 import org.springdemo.serviceproviders.basics.worker.dto.WorkerResponse;

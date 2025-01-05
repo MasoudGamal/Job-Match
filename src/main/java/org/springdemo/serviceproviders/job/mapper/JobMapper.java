@@ -33,7 +33,6 @@ public class JobMapper {
                         .orElseThrow(() -> new CategoryNotFundException("Category Not Fund : "));
         job.setCategory(category);
 
-//        job.setWorker(jobRequest.getWorker());
 
 
         return job;
@@ -58,8 +57,7 @@ public class JobMapper {
        jobResponse.setId(job.getId());
        jobResponse.setName(job.getName());
        jobResponse.setCategory(job.getCategory());
-//       jobResponse.setWorker(job.getWorker());
-//        jobResponse.setWorker();
+
 
 
         return jobResponse;

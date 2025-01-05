@@ -11,6 +11,8 @@ import org.springdemo.serviceproviders.categores.mapper.CategoryMapper;
 import org.springdemo.serviceproviders.categores.repository.CategoryRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class CategoryService {
@@ -43,5 +45,36 @@ public class CategoryService {
 
 
         return categoryMapper.categoryToResponse(category);
+    }
+
+    public List<CategoryResponse> findAll(){
+
+        if (categoryRepository.findAll().isEmpty()){
+            throw new CategoriesAreEmptyException("Categories Are Empty  :  ");
+        }
+
+        List<Category> categories = categoryRepository.findAll();
+
+        return categoryMapper.listCategoryToListResponse(categories);
+    }
+
+    public CategoryResponse update(CategoryRequest categoryRequest){
+
+        Category category = categoryRepository.findById(categoryRequest.getId())
+                .orElseThrow(() -> new CategoryNotFundException("Category Not Fund  :  "));
+
+        Category category1 = categoryMapper.requestToCategory(categoryRequest);
+        category1.setId(categoryRequest.getId());
+        categoryRepository.save(category1);
+
+        return categoryMapper.categoryToResponse(category1);
+    }
+
+    public void delete(Integer id){
+
+        Category category = categoryRepository.findById(id)
+                .orElseThrow(() -> new CategoryNotFundException("Category Not Fund  :  "));
+
+        categoryRepository.delete(category);
     }
 }

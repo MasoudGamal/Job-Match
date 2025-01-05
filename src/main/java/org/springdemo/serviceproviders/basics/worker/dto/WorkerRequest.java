@@ -26,8 +26,6 @@ public class WorkerRequest {
     @NotBlank
     private String role;
     @NotBlank
-    private String service;
-    @NotBlank
     private String address;
     private int age;
 }

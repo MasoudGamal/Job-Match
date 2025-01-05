@@ -38,7 +38,6 @@ public class WorkerMapper {
         worker.getRoles().add(role);
         worker.setAddress(workerRequest.getAddress());
         worker.setAge(workerRequest.getAge());
-        worker.setService(workerRequest.getService());
         worker.setEmail(workerRequest.getEmail());
 
         return worker;
@@ -61,7 +60,7 @@ public class WorkerMapper {
         WorkerResponse workerResponse = new WorkerResponse();
         workerResponse.setId(worker.getId());
         workerResponse.setUserName(worker.getUsername());
-        workerResponse.setService(worker.getService());
+
         workerResponse.setAge(worker.getAge());
         workerResponse.setAddress(worker.getAddress());
         return workerResponse;

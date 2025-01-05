@@ -3,6 +3,7 @@ package org.springdemo.serviceproviders.categores.dtos;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springdemo.serviceproviders.basics.worker.entity.Worker;
+import org.springdemo.serviceproviders.job.entity.Job;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,6 @@ public class CategoryResponse {
 
     private String name;
 
-    private List<Worker> workers = new ArrayList<>();
+    private List<Job> jobs = new ArrayList<>();
 
 }

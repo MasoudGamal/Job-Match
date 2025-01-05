@@ -19,6 +19,9 @@ import java.util.List;
 @NoArgsConstructor
 public class JobRequest {
 
+
+
+    private int id ;
     @NotBlank
     private String name;
 
@@ -26,9 +29,6 @@ public class JobRequest {
     private Double price;
     @NotNull
     private int categoryId;
-
-//    @NotBlank
-//    private Worker worker;
 
 
 }

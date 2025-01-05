@@ -4,13 +4,11 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springdemo.serviceproviders.categores.dtos.CategoryRequest;
 import org.springdemo.serviceproviders.categores.dtos.CategoryResponse;
-import org.springdemo.serviceproviders.categores.entity.Category;
-import org.springdemo.serviceproviders.categores.exception.CategoriesAreEmptyException;
-import org.springdemo.serviceproviders.categores.exception.CategoryAlreadyExistException;
-import org.springdemo.serviceproviders.categores.exception.CategoryNotFundException;
 import org.springdemo.serviceproviders.categores.service.CategoryService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/category")
@@ -30,8 +28,29 @@ public class CategoryController {
     @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public CategoryResponse findById(@PathVariable Integer id){
-
         return categoryService.findById(id);
+    }
+
+    @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public List<CategoryResponse> findAll(){
+        return categoryService.findAll();
+    }
+
+    @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public CategoryResponse update(@Valid @RequestBody CategoryRequest categoryRequest){
+
+        return categoryService.update(categoryRequest);
+
+    }
+
+
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public void delete(@PathVariable Integer id){
+
+        categoryService.delete(id);
 
     }
 }
