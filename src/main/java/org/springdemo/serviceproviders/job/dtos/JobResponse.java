@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springdemo.serviceproviders.basics.worker.dto.WorkerResponse;
 import org.springdemo.serviceproviders.basics.worker.entity.Worker;
+import org.springdemo.serviceproviders.categores.dtos.CategoryResponse;
 import org.springdemo.serviceproviders.categores.entity.Category;
 
 
@@ -20,9 +22,7 @@ public class JobResponse {
 
     private Double price;
 
-    private Worker worker;
-
-    private Category category;
+    private WorkerResponse workerResponse;
 
 
 }

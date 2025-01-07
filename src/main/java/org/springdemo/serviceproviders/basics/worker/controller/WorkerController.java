@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springdemo.serviceproviders.basics.worker.dto.WorkerRequest;
 import org.springdemo.serviceproviders.basics.worker.dto.WorkerResponse;
 import org.springdemo.serviceproviders.basics.worker.service.WorkerService;
+import org.springdemo.serviceproviders.job.dtos.JobResponse;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,6 +42,16 @@ public class WorkerController {
     public WorkerResponse update(@Valid @RequestBody WorkerRequest workerRequest){
 
         return workerService.update(workerRequest);
+
+    }
+
+
+//    ---------------------------------------------------------
+
+    @GetMapping("{id}/job")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public List<JobResponse> findAllJobByWorkerId(@PathVariable Integer id){
+        return workerService.findAllJobByWorkerId(id);
 
     }
 }

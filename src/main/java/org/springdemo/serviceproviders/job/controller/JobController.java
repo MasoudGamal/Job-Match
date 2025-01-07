@@ -2,8 +2,11 @@ package org.springdemo.serviceproviders.job.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springdemo.serviceproviders.basics.worker.dto.WorkerResponse;
 import org.springdemo.serviceproviders.basics.worker.entity.Worker;
 import org.springdemo.serviceproviders.basics.worker.exception.CheckTheWorkerException;
+import org.springdemo.serviceproviders.basics.worker.mapper.WorkerMapper;
+import org.springdemo.serviceproviders.basics.worker.repository.WorkerRepository;
 import org.springdemo.serviceproviders.job.dtos.JobRequest;
 import org.springdemo.serviceproviders.job.dtos.JobResponse;
 import org.springdemo.serviceproviders.job.entity.Job;
@@ -22,6 +25,10 @@ import java.util.List;
 public class JobController {
 
     private final JobService jobService;
+
+    private final WorkerRepository workerRepository ;
+
+    private final WorkerMapper workerMapper;
 
     @PostMapping
     @PreAuthorize("hasAuthority('WORKER')")
@@ -58,4 +65,11 @@ public class JobController {
                       ,@AuthenticationPrincipal Worker worker){
         jobService.delete(id , worker);
     }
+
+//    -------------------------------------------------------------------
+
+
+
+
+
 }

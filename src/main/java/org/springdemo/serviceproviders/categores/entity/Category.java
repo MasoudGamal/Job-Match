@@ -14,6 +14,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springdemo.serviceproviders.basics.user.entity.User;
 import org.springdemo.serviceproviders.basics.worker.entity.Worker;
+import org.springdemo.serviceproviders.job.dtos.JobResponse;
 import org.springdemo.serviceproviders.job.entity.Job;
 
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class Category {
     private String name;
 
     @OneToMany(mappedBy = "category")
-    private List<Job> jobs = new ArrayList<>();
+    private List<Job> job = new ArrayList<>();
 
 
 

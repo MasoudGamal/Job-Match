@@ -23,7 +23,7 @@ public class Worker extends User {
     private String address;
     private int age;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
 //    @JsonIgnore
     private List<Job> job = new ArrayList<>();
 

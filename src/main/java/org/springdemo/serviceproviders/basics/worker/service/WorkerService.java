@@ -10,6 +10,10 @@ import org.springdemo.serviceproviders.basics.worker.exception.WorkerNotFundExce
 import org.springdemo.serviceproviders.basics.worker.mapper.WorkerMapper;
 import org.springdemo.serviceproviders.basics.worker.repository.WorkerRepository;
 import org.springdemo.serviceproviders.basics.role.repository.RoleRepository;
+import org.springdemo.serviceproviders.job.dtos.JobResponse;
+import org.springdemo.serviceproviders.job.entity.Job;
+import org.springdemo.serviceproviders.job.mapper.JobMapper;
+import org.springdemo.serviceproviders.job.repository.JobRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +27,10 @@ public class WorkerService {
     private final WorkerRepository workerRepository;
 
     private final WorkerMapper workerMapper;
+
+    private final JobRepository jobRepository;
+
+    private final JobMapper jobMapper ;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -70,8 +78,6 @@ public class WorkerService {
         workerRepository.delete(worker);
     }
 
-
-
     public WorkerResponse update(WorkerRequest workerRequest){
 
         Worker worker = workerRepository.findById(workerRequest.getId())
@@ -83,6 +89,15 @@ public class WorkerService {
 
         return workerMapper.adminToResponse(worker1);
 
+    }
+
+
+
+//    -------------------------------------------------------------
+
+    public List<JobResponse> findAllJobByWorkerId(Integer id){
+        List<Job> jobList = jobRepository.findAllJobByWorkerId(id);
+        return jobMapper.listJobToListResponse(jobList);
     }
 
 }

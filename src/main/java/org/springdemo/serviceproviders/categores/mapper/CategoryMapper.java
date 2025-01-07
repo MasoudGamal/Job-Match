@@ -22,6 +22,7 @@ public class CategoryMapper {
 
     public final CategoryRepository categoryRepository;
 
+
     public Category requestToCategory(CategoryRequest categoryRequest){
 
         Category category = new Category();
@@ -51,7 +52,7 @@ public class CategoryMapper {
         CategoryResponse categoryResponse = new CategoryResponse();
         categoryResponse.setId(category.getId());
         categoryResponse.setName(category.getName());
-        categoryResponse.setJobs(category.getJobs());
+
 
         return categoryResponse;
     }

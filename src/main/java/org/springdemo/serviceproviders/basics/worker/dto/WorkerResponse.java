@@ -17,7 +17,6 @@ public class WorkerResponse {
 
     private int id ;
     private String userName;
-    private List<Job> service = new ArrayList<>();
     private String address;
     private int age;
 

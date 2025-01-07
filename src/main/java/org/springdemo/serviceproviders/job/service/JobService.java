@@ -1,8 +1,11 @@
 package org.springdemo.serviceproviders.job.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springdemo.serviceproviders.basics.worker.dto.WorkerResponse;
 import org.springdemo.serviceproviders.basics.worker.entity.Worker;
 import org.springdemo.serviceproviders.basics.worker.exception.CheckTheWorkerException;
+import org.springdemo.serviceproviders.basics.worker.mapper.WorkerMapper;
 import org.springdemo.serviceproviders.basics.worker.repository.WorkerRepository;
 import org.springdemo.serviceproviders.job.dtos.JobRequest;
 import org.springdemo.serviceproviders.job.dtos.JobResponse;
@@ -23,6 +26,8 @@ public class JobService {
     private final JobRepository jobRepository;
 
     private  final JobMapper jobMapper;
+
+    private final WorkerMapper workerMapper ;
     private final WorkerRepository workerRepository;
 
     public JobResponse create(JobRequest jobRequest , Worker worker){
@@ -36,7 +41,7 @@ public class JobService {
         workerRepository.save(worker);
 
         JobResponse jobResponse = jobMapper.jobToResponse(job);
-        jobResponse.setWorker(worker);
+        jobResponse.setWorkerResponse(workerMapper.adminToResponse(worker));
         return jobResponse;
     }
 
@@ -86,4 +91,11 @@ public class JobService {
 
         }else throw new CheckTheWorkerException("Check The Worker  :  ");
     }
+
+
+
+//    -----------------------------------------------------------------
+
+
+
 }

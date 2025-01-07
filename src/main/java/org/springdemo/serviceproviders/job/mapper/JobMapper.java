@@ -2,6 +2,7 @@ package org.springdemo.serviceproviders.job.mapper;
 
 import lombok.RequiredArgsConstructor;
 import org.springdemo.serviceproviders.basics.user.repository.UserRepository;
+import org.springdemo.serviceproviders.basics.worker.mapper.WorkerMapper;
 import org.springdemo.serviceproviders.categores.entity.Category;
 import org.springdemo.serviceproviders.categores.exception.CategoryNotFundException;
 import org.springdemo.serviceproviders.categores.repository.CategoryRepository;
@@ -20,6 +21,8 @@ public class JobMapper {
     private final UserRepository userRepository ;
 
     public final JobRepository jobRepository;
+
+    private final WorkerMapper workerMapper;
 
     private final CategoryRepository categoryRepository;
 
@@ -56,7 +59,7 @@ public class JobMapper {
        jobResponse.setPrice(job.getPrice());
        jobResponse.setId(job.getId());
        jobResponse.setName(job.getName());
-       jobResponse.setCategory(job.getCategory());
+       jobResponse.setWorkerResponse(workerMapper.adminToResponse(job.getWorker()));
 
 
 
