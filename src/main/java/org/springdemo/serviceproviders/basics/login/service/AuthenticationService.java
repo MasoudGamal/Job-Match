@@ -3,6 +3,7 @@ package org.springdemo.serviceproviders.basics.login.service;
 import lombok.RequiredArgsConstructor;
 import org.springdemo.serviceproviders.basics.login.dto.LoginRequestDto;
 import org.springdemo.serviceproviders.basics.login.dto.LoginResponseDto;
+import org.springdemo.serviceproviders.basics.login.exception.AccountIsNotActiveException;
 import org.springdemo.serviceproviders.basics.login.exception.PasswordIncorrectException;
 import org.springdemo.serviceproviders.basics.login.exception.UserNotFundException;
 import org.springdemo.serviceproviders.basics.security.JwtService;
@@ -33,11 +34,13 @@ public class AuthenticationService {
 
 
         if (passwordEncoder.matches(loginRequestDto.getPassword(), user.getPassword()) ) {
+        if (user.getIsActive().equals(false))throw new AccountIsNotActiveException("account Is Not Active : ");
             LoginResponseDto loginResponseDto = new LoginResponseDto();
             loginResponseDto.setRole(user.getRoles().stream().map(Role::getRole).collect(Collectors.toSet()));
             loginResponseDto.setId(user.getId());
             loginResponseDto.setUserName(user.getUsername());
             loginResponseDto.setToken(jwtService.generateToken(user));
+
 
             return loginResponseDto;
         } else {

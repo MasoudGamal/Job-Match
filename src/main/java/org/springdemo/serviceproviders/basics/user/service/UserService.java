@@ -42,9 +42,11 @@ public class UserService {
 
 //    ----------------------------------------------------------------
 
-    public void phoneNumber(String phoneNumber , User user){
+    public void phoneNumber(String phoneNumber){
 
-        if (phoneNumber.equals(user.getPhoneNumber())){
+        User user1 = userRepository.findUserByPhoneNumber(phoneNumber)
+                .orElseThrow(() -> new MobileNumberIsIncorrect("Mobile Number Is Incorrect  :  "));
+
 
             String stringOtp = otpService.generateOTP();
 
@@ -52,16 +54,18 @@ public class UserService {
 
             Otp otp1 = new Otp();
             otp1.setOtp(stringOtp);
-            otp1.setUser(user);
+            otp1.setUser(user1);
             otpRepository.save(otp1);
 
-        }else throw new MobileNumberIsIncorrect("Mobile Number Is Incorrect  :  ");
     }
 
 
-   public String Verification(String otp , User user){
+   public String Verification(String otp , String phoneNumber){
 
-        Otp otp1 = otpRepository.findOtpByUser(user)
+       User user = userRepository.findUserByPhoneNumber(phoneNumber)
+               .orElseThrow(() -> new MobileNumberIsIncorrect("Mobile Number Is Incorrect  :  "));
+
+       Otp otp1 = otpRepository.findOtpByUser(user)
                 .orElseThrow(() -> new OtpNotFundException("Otp Not Fund  :  "));
 
         user.setIsActive(true);

@@ -25,17 +25,16 @@ public class UserController {
 
 
     @PostMapping("phone")
-    public void phoneNumber(@RequestParam String phoneNumber
-                           ,@AuthenticationPrincipal User user){
+//    @PreAuthorize("has")
+    public void phoneNumber(@RequestParam String phoneNumber){
 
-        userService.phoneNumber(phoneNumber , user);
+        userService.phoneNumber(phoneNumber);
     }
 
 
     @PostMapping("otp")
-    public String Verification(@RequestParam String otp
-            ,@AuthenticationPrincipal User user){
+    public String Verification(@RequestParam String otp ,@RequestParam String phoneNumber){
 
-       return userService.Verification(otp, user);
+       return userService.Verification(otp, phoneNumber);
     }
 }
