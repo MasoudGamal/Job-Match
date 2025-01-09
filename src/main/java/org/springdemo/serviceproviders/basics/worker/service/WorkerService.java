@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springdemo.serviceproviders.basics.worker.dto.WorkerRequest;
 import org.springdemo.serviceproviders.basics.worker.dto.WorkerResponse;
 import org.springdemo.serviceproviders.basics.worker.entity.Worker;
+import org.springdemo.serviceproviders.basics.worker.exception.MobileNumberIsIncorrect;
+import org.springdemo.serviceproviders.basics.worker.exception.TheCodeIsWrong;
 import org.springdemo.serviceproviders.basics.worker.exception.WorkerAlreadyExistsException;
 import org.springdemo.serviceproviders.basics.worker.exception.WorkerNotFundException;
 import org.springdemo.serviceproviders.basics.worker.mapper.WorkerMapper;
@@ -14,6 +16,11 @@ import org.springdemo.serviceproviders.job.dtos.JobResponse;
 import org.springdemo.serviceproviders.job.entity.Job;
 import org.springdemo.serviceproviders.job.mapper.JobMapper;
 import org.springdemo.serviceproviders.job.repository.JobRepository;
+import org.springdemo.serviceproviders.otp.entity.Otp;
+import org.springdemo.serviceproviders.otp.entity.exception.OtpNotFundException;
+import org.springdemo.serviceproviders.otp.entity.repository.OtpRepository;
+import org.springdemo.serviceproviders.otp.entity.service.OtpService;
+import org.springdemo.serviceproviders.sms.SmsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -32,9 +39,11 @@ public class WorkerService {
 
     private final JobMapper jobMapper ;
 
-    private final PasswordEncoder passwordEncoder;
+    private final OtpRepository otpRepository;
 
-    private final RoleRepository roleRepository;
+    private final OtpService otpService;
+
+    private final SmsService smsService;
 
     public WorkerResponse create(WorkerRequest workerRequest){
 
@@ -99,5 +108,39 @@ public class WorkerService {
         List<Job> jobList = jobRepository.findAllJobByWorkerId(id);
         return jobMapper.listJobToListResponse(jobList);
     }
+
+//    ----------------------------------------------------------------
+
+//    public void phoneNumber(String phoneNumber , Worker worker){
+//
+//        if (phoneNumber.equals(worker.getPhoneNumber())){
+//
+//            String stringOtp = otpService.generateOTP();
+//
+//            smsService.sendSms(phoneNumber , stringOtp);
+//
+//            Otp otp1 = new Otp();
+//            otp1.setOtp(stringOtp);
+//            otp1.setUser(worker);
+//            otpRepository.save(otp1);
+//
+//        }else throw new MobileNumberIsIncorrect("Mobile Number Is Incorrect  :  ");
+//    }
+//
+//
+//   public String Verification(String otp , Worker worker){
+//
+//        Otp otp1 = otpRepository.findByUser(worker)
+//                .orElseThrow(() -> new OtpNotFundException("Otp Not Fund  :  "));
+//
+//        if (otp1.getUser().equals(worker)){
+//            worker.setIsActive(true);
+//
+//            return "Verified successfully" ;
+//        }
+//        throw new TheCodeIsWrong("The code is wrong :  ");
+//   }
+
+
 
 }

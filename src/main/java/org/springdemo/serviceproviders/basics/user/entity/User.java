@@ -29,6 +29,20 @@ public class User implements UserDetails {
     private String password;
     private String phoneNumber;
 
+//    @Column(nullable = false, columnDefinition = "BOOLEAN")
+    private Boolean isActive = false ;
+
+
+//    @Enumerated(EnumType.STRING)
+//    @Column(nullable = false)
+//    private BooleanString isActive = BooleanString.FALSE;
+//
+//    // Getters and Setters
+//
+//    public enum BooleanString {
+//        TRUE, FALSE;
+//    }
+
 
     @ManyToMany(fetch = FetchType.EAGER )
     @JoinTable(

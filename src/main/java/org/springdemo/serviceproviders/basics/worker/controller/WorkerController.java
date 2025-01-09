@@ -4,9 +4,14 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springdemo.serviceproviders.basics.worker.dto.WorkerRequest;
 import org.springdemo.serviceproviders.basics.worker.dto.WorkerResponse;
+import org.springdemo.serviceproviders.basics.worker.entity.Worker;
+import org.springdemo.serviceproviders.basics.worker.exception.MobileNumberIsIncorrect;
 import org.springdemo.serviceproviders.basics.worker.service.WorkerService;
 import org.springdemo.serviceproviders.job.dtos.JobResponse;
+import org.springdemo.serviceproviders.otp.entity.Otp;
+import org.springdemo.serviceproviders.otp.entity.exception.OtpNotFundException;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,4 +59,25 @@ public class WorkerController {
         return workerService.findAllJobByWorkerId(id);
 
     }
+
+
+//    -------------------------------------------------------------
+
+
+
+
+//    @PostMapping("phone")
+//    public void phoneNumber(@RequestParam String phoneNumber
+//                           ,@AuthenticationPrincipal Worker worker){
+//
+//        workerService.phoneNumber(phoneNumber , worker);
+//    }
+//
+//
+//    @PostMapping("otp")
+//    public String Verification(@RequestParam String otp
+//            ,@AuthenticationPrincipal Worker worker){
+//
+//       return workerService.Verification(otp, worker);
+//    }
 }

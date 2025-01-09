@@ -28,4 +28,5 @@ public class WorkerRequest {
     @NotBlank
     private String address;
     private int age;
+    private String otp;
 }
