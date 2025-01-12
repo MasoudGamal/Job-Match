@@ -1,6 +1,5 @@
-package org.springdemo.serviceproviders.categores.dtos;
+package org.springdemo.serviceproviders.categories.dtos;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 
@@ -9,11 +8,10 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 //@RequiredArgsConstructor
-public class CategoryRequest {
+public class CategoryResponse {
 
     private int id;
 
-    @NotBlank
     private String name;
 
 }

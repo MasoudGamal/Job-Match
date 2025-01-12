@@ -1,18 +1,16 @@
-package org.springdemo.serviceproviders.categores.service;
+package org.springdemo.serviceproviders.categories.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springdemo.serviceproviders.basics.worker.dto.WorkerResponse;
-import org.springdemo.serviceproviders.basics.worker.entity.Worker;
 import org.springdemo.serviceproviders.basics.worker.mapper.WorkerMapper;
 import org.springdemo.serviceproviders.basics.worker.repository.WorkerRepository;
-import org.springdemo.serviceproviders.categores.dtos.CategoryRequest;
-import org.springdemo.serviceproviders.categores.dtos.CategoryResponse;
-import org.springdemo.serviceproviders.categores.entity.Category;
-import org.springdemo.serviceproviders.categores.exception.CategoriesAreEmptyException;
-import org.springdemo.serviceproviders.categores.exception.CategoryAlreadyExistException;
-import org.springdemo.serviceproviders.categores.exception.CategoryNotFundException;
-import org.springdemo.serviceproviders.categores.mapper.CategoryMapper;
-import org.springdemo.serviceproviders.categores.repository.CategoryRepository;
+import org.springdemo.serviceproviders.categories.dtos.CategoryRequest;
+import org.springdemo.serviceproviders.categories.dtos.CategoryResponse;
+import org.springdemo.serviceproviders.categories.entity.Category;
+import org.springdemo.serviceproviders.categories.exception.CategoriesAreEmptyException;
+import org.springdemo.serviceproviders.categories.exception.CategoryAlreadyExistException;
+import org.springdemo.serviceproviders.categories.exception.CategoryNotFundException;
+import org.springdemo.serviceproviders.categories.mapper.CategoryMapper;
+import org.springdemo.serviceproviders.categories.repository.CategoryRepository;
 import org.springdemo.serviceproviders.job.dtos.JobResponse;
 import org.springdemo.serviceproviders.job.entity.Job;
 import org.springdemo.serviceproviders.job.mapper.JobMapper;

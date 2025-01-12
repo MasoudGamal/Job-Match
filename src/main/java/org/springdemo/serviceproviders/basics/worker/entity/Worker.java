@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springdemo.serviceproviders.basics.user.entity.User;
 import org.springdemo.serviceproviders.job.entity.Job;
+import org.springdemo.serviceproviders.toRequest.entity.ToRequest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,11 @@ public class Worker extends User {
     @OneToMany(fetch = FetchType.EAGER)
 //    @JsonIgnore
     private List<Job> job = new ArrayList<>();
+
+
+
+    @OneToMany
+    private List<ToRequest> requests;
 
 
 }

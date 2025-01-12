@@ -3,9 +3,9 @@ package org.springdemo.serviceproviders.job.mapper;
 import lombok.RequiredArgsConstructor;
 import org.springdemo.serviceproviders.basics.user.repository.UserRepository;
 import org.springdemo.serviceproviders.basics.worker.mapper.WorkerMapper;
-import org.springdemo.serviceproviders.categores.entity.Category;
-import org.springdemo.serviceproviders.categores.exception.CategoryNotFundException;
-import org.springdemo.serviceproviders.categores.repository.CategoryRepository;
+import org.springdemo.serviceproviders.categories.entity.Category;
+import org.springdemo.serviceproviders.categories.exception.CategoryNotFundException;
+import org.springdemo.serviceproviders.categories.repository.CategoryRepository;
 import org.springdemo.serviceproviders.job.dtos.JobRequest;
 import org.springdemo.serviceproviders.job.dtos.JobResponse;
 import org.springdemo.serviceproviders.job.entity.Job;
@@ -60,6 +60,7 @@ public class JobMapper {
        jobResponse.setId(job.getId());
        jobResponse.setName(job.getName());
        jobResponse.setWorkerResponse(workerMapper.adminToResponse(job.getWorker()));
+       jobResponse.setImagePaths(job.getImagePaths());
 
 
 

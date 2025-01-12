@@ -2,13 +2,12 @@ package org.springdemo.serviceproviders.basics.worker.service;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springdemo.serviceproviders.basics.client.entity.Client;
+import org.springdemo.serviceproviders.basics.user.entity.User;
 import org.springdemo.serviceproviders.basics.worker.dto.WorkerRequest;
 import org.springdemo.serviceproviders.basics.worker.dto.WorkerResponse;
 import org.springdemo.serviceproviders.basics.worker.entity.Worker;
-import org.springdemo.serviceproviders.basics.worker.exception.MobileNumberIsIncorrect;
-import org.springdemo.serviceproviders.basics.worker.exception.TheCodeIsWrong;
-import org.springdemo.serviceproviders.basics.worker.exception.WorkerAlreadyExistsException;
-import org.springdemo.serviceproviders.basics.worker.exception.WorkerNotFundException;
+import org.springdemo.serviceproviders.basics.worker.exception.*;
 import org.springdemo.serviceproviders.basics.worker.mapper.WorkerMapper;
 import org.springdemo.serviceproviders.basics.worker.repository.WorkerRepository;
 import org.springdemo.serviceproviders.basics.role.repository.RoleRepository;
@@ -21,9 +20,19 @@ import org.springdemo.serviceproviders.otp.entity.exception.OtpNotFundException;
 import org.springdemo.serviceproviders.otp.entity.repository.OtpRepository;
 import org.springdemo.serviceproviders.otp.entity.service.OtpService;
 import org.springdemo.serviceproviders.sms.SmsService;
+import org.springdemo.serviceproviders.toRequest.dtos.Response;
+import org.springdemo.serviceproviders.toRequest.entity.ToRequest;
+import org.springdemo.serviceproviders.toRequest.enums.Status;
+import org.springdemo.serviceproviders.toRequest.exception.ErrorInClientToRequestException;
+import org.springdemo.serviceproviders.toRequest.exception.ErrorInTheCaseException;
+import org.springdemo.serviceproviders.toRequest.exception.RequestNotFundException;
+import org.springdemo.serviceproviders.toRequest.exception.RequestsAreEmptyException;
+import org.springdemo.serviceproviders.toRequest.mapper.ToRequestMapper;
+import org.springdemo.serviceproviders.toRequest.repository.RequestRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -39,9 +48,9 @@ public class WorkerService {
 
     private final JobMapper jobMapper ;
 
-    private final OtpRepository otpRepository;
+    private final RequestRepository requestRepository;
 
-    private final OtpService otpService;
+    private final ToRequestMapper requestMapper;
 
     private final SmsService smsService;
 
@@ -111,36 +120,100 @@ public class WorkerService {
 
 //    ----------------------------------------------------------------
 
-//    public void phoneNumber(String phoneNumber , Worker worker){
 //
-//        if (phoneNumber.equals(worker.getPhoneNumber())){
+
+    public List<Response> findAllRequestByWorker(Worker worker){
+
+        List<ToRequest> toRequestList = requestRepository.findAllByWorker(worker);
+        if (toRequestList.isEmpty()) throw new RequestsAreEmptyException("Requests Are Empty  :  ");
+
+
+        return requestMapper.listEntityToListResponse(toRequestList);
+
+    }
+
+
+    public Status changeStatus(Status status ,Integer id){
+
+        ToRequest toRequest = requestRepository.findById(id)
+                .orElseThrow(() -> new RequestNotFundException("Request Not Fund   :    "));
+
+
+
+        // التحقق مما إذا كانت الحالة موجودة في Enum
+        boolean isValidStatus = Arrays.stream(Status.values())
+                .anyMatch(existingStatus -> existingStatus == status);
+
+        if (!isValidStatus) {
+            throw new IllegalArgumentException("Invalid Status: " + status);
+        }
+
+
+
+        toRequest.setStatus(status);
+        requestRepository.save(toRequest);
+
+
+
+        return toRequest.getStatus();
+    }
+
+
+
+
+    public List<Response> findAllByStatus(Status status , Worker worker){
+
+        List<ToRequest> toRequestList = requestRepository.findAllByWorkerAndStatus(worker , status);
+        if (toRequestList.isEmpty()) throw new RequestNotFundException("Request Not Fund  :  ");
+
+        return requestMapper.listEntityToListResponse(toRequestList);
+    }
+
+
+//    public Status changeStatus(User user, Integer requestId, Status status) {
 //
-//            String stringOtp = otpService.generateOTP();
+//        ToRequest request = requestRepository.findById(requestId)
+//                .orElseThrow(() -> new RequestNotFundException("Request Not Found: " + requestId));
 //
-//            smsService.sendSms(phoneNumber , stringOtp);
-//
-//            Otp otp1 = new Otp();
-//            otp1.setOtp(stringOtp);
-//            otp1.setUser(worker);
-//            otpRepository.save(otp1);
-//
-//        }else throw new MobileNumberIsIncorrect("Mobile Number Is Incorrect  :  ");
-//    }
-//
-//
-//   public String Verification(String otp , Worker worker){
-//
-//        Otp otp1 = otpRepository.findByUser(worker)
-//                .orElseThrow(() -> new OtpNotFundException("Otp Not Fund  :  "));
-//
-//        if (otp1.getUser().equals(worker)){
-//            worker.setIsActive(true);
-//
-//            return "Verified successfully" ;
+//        if (!request.getWorker().equals(user) && !request.getClient().equals(user)) {
+//            throw new ErrorInWorkerToRequestException("User is not authorized to change the status of this request.");
 //        }
-//        throw new TheCodeIsWrong("The code is wrong :  ");
-//   }
-
-
+//
+//        // ----- (Client)
+//        if (user.equals(request.getClient())) {
+//            if (status.equals("CANCEL") && request.getStatus().equals("PENDING")) {
+//                request.setStatus(status);
+//            } else {
+//                throw new ErrorInTheCaseException("Invalid status transition for client.");
+//            }
+//        }
+//
+//        //  (Worker)
+//        if (user.equals(request.getWorker())) {
+//
+//
+//            if (request.getStatus().equals("PENDING") && (status.equals("APPROVED") || status.equals("REJECTED") || status.equals("COMPLETED"))) {
+//
+//                request.setStatus(status);
+//
+//            } else if (request.getStatus().equals("APPROVED") && (status.equals("REJECTED") || status.equals("COMPLETED"))) {
+//
+//                request.setStatus(status);
+//
+//            } else if (request.getStatus().equals("REJECTED") && status.equals("COMPLETED")) {
+//
+//                request.setStatus(status);
+//
+//            } else {
+//
+//                throw new ErrorInTheCaseException("Invalid status transition for worker.");
+//
+//            }
+//        }
+//
+//        requestRepository.save(request);
+//
+//        return status;
+//    }
 
 }

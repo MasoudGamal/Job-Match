@@ -1,13 +1,9 @@
-package org.springdemo.serviceproviders.categores.repository;
+package org.springdemo.serviceproviders.categories.repository;
 
-import lombok.RequiredArgsConstructor;
-import org.springdemo.serviceproviders.basics.worker.entity.Worker;
-import org.springdemo.serviceproviders.categores.entity.Category;
+import org.springdemo.serviceproviders.categories.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository

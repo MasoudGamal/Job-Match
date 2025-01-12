@@ -1,20 +1,10 @@
-package org.springdemo.serviceproviders.categores.entity;
+package org.springdemo.serviceproviders.categories.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.annotations.DialectOverride;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.springdemo.serviceproviders.basics.user.entity.User;
-import org.springdemo.serviceproviders.basics.worker.entity.Worker;
-import org.springdemo.serviceproviders.job.dtos.JobResponse;
 import org.springdemo.serviceproviders.job.entity.Job;
 
 import java.util.ArrayList;

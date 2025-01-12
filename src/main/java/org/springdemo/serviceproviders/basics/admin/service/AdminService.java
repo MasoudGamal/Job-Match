@@ -9,6 +9,9 @@ import org.springdemo.serviceproviders.basics.admin.exception.AdminNotFundExcept
 import org.springdemo.serviceproviders.basics.admin.mapper.AdminMapper;
 import org.springdemo.serviceproviders.basics.admin.repository.AdminRepository;
 import org.springdemo.serviceproviders.basics.role.repository.RoleRepository;
+import org.springdemo.serviceproviders.toRequest.entity.ToRequest;
+import org.springdemo.serviceproviders.toRequest.exception.RequestNotFundException;
+import org.springdemo.serviceproviders.toRequest.repository.RequestRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +26,7 @@ public class AdminService {
 
     private final AdminMapper adminMapper;
 
-    private final PasswordEncoder passwordEncoder;
+    private final RequestRepository requestRepository;
 
     private final RoleRepository roleRepository;
 
@@ -82,6 +85,15 @@ public class AdminService {
 
         return adminMapper.adminToResponse(admin1);
 
+    }
+
+    public void deleteToRequest(Integer id){
+
+        ToRequest toRequest = requestRepository.findById(id)
+                .orElseThrow(() -> new RequestNotFundException("Request Not Fund : "));
+
+
+        requestRepository.delete(toRequest);
     }
 
 }

@@ -34,7 +34,9 @@ public class AuthenticationService {
 
 
         if (passwordEncoder.matches(loginRequestDto.getPassword(), user.getPassword()) ) {
-        if (user.getIsActive().equals(false))throw new AccountIsNotActiveException("account Is Not Active : ");
+
+            if (user.getIsActive().equals(false))throw new AccountIsNotActiveException("account Is Not Active : ");
+
             LoginResponseDto loginResponseDto = new LoginResponseDto();
             loginResponseDto.setRole(user.getRoles().stream().map(Role::getRole).collect(Collectors.toSet()));
             loginResponseDto.setId(user.getId());

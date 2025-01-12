@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springdemo.serviceproviders.basics.admin.dto.AdminRequest;
 import org.springdemo.serviceproviders.basics.admin.dto.AdminResponse;
 import org.springdemo.serviceproviders.basics.admin.service.AdminService;
+import org.springdemo.serviceproviders.toRequest.entity.ToRequest;
+import org.springdemo.serviceproviders.toRequest.exception.RequestNotFundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -40,6 +42,13 @@ public class AdminController {
     public AdminResponse update(@Valid @RequestBody AdminRequest adminRequest){
 
         return adminService.update(adminRequest);
+
+    }
+
+
+    @DeleteMapping("request/{id}")
+    public void deleteToRequest(@PathVariable Integer id){
+        adminService.deleteToRequest(id);
 
     }
 }

@@ -9,6 +9,19 @@ import org.springdemo.serviceproviders.basics.client.exception.ClientNotFundExce
 import org.springdemo.serviceproviders.basics.client.mapper.ClientMapper;
 import org.springdemo.serviceproviders.basics.client.repository.ClientRepository;
 import org.springdemo.serviceproviders.basics.role.repository.RoleRepository;
+import org.springdemo.serviceproviders.basics.user.entity.User;
+import org.springdemo.serviceproviders.basics.worker.entity.Worker;
+import org.springdemo.serviceproviders.basics.worker.exception.ErrorInWorkerToRequestException;
+import org.springdemo.serviceproviders.toRequest.dtos.Request;
+import org.springdemo.serviceproviders.toRequest.dtos.Response;
+import org.springdemo.serviceproviders.toRequest.entity.ToRequest;
+import org.springdemo.serviceproviders.toRequest.enums.Status;
+import org.springdemo.serviceproviders.toRequest.exception.ErrorInClientToRequestException;
+import org.springdemo.serviceproviders.toRequest.exception.ErrorInTheCaseException;
+import org.springdemo.serviceproviders.toRequest.exception.RequestNotFundException;
+import org.springdemo.serviceproviders.toRequest.exception.RequestsAreEmptyException;
+import org.springdemo.serviceproviders.toRequest.mapper.ToRequestMapper;
+import org.springdemo.serviceproviders.toRequest.repository.RequestRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +36,9 @@ public class ClientService {
 
     private final ClientMapper clientMapper;
 
-    private final PasswordEncoder passwordEncoder;
+    private final RequestRepository requestRepository;
 
-    private final RoleRepository roleRepository;
+    private final ToRequestMapper toRequestMapper;
 
     public ClientResponse create(ClientRequest clientRequest){
 
@@ -83,5 +96,93 @@ public class ClientService {
         return clientMapper.adminToResponse(client1);
 
     }
+
+    public List<Response> findAllToRequestByClientId(Integer id){
+
+
+       List<ToRequest> toRequestList = requestRepository.findAllByClientId(id);
+       if (toRequestList.isEmpty())throw new RequestsAreEmptyException("Requests Are Empty  :  ");
+
+       return toRequestMapper.listEntityToListResponse(toRequestList);
+
+
+    }
+
+
+
+    public List<Response> findAllByStatus(Status status , Client client){
+
+        List<ToRequest> toRequestList = requestRepository.findAllByClientAndStatus(client , status);
+        if (toRequestList.isEmpty()) throw new RequestNotFundException("Request Not Fund  :  ");
+
+        return toRequestMapper.listEntityToListResponse(toRequestList);
+    }
+
+//    public String changeStatus( Client client , Integer requestId , Status status){
+//
+//        ToRequest request = requestRepository.findById(requestId)
+//                .orElseThrow(() -> new RequestNotFundException("Request Not Fund  :  "));
+//
+//        if (!request.getClient().equals(client)) throw new ErrorInClientToRequestException("Error In Client To Request  :  ");
+//
+//        if (status.equals("CANCEL") & request.getStatus().equals("PENDING")){
+//
+//            request.setStatus(status);
+//            requestRepository.save(request);
+//
+//            return "The order has been cancelled ";
+//
+//        }else throw new ErrorInTheCaseException("Error In The Case  :  ");
+//
+//
+//    }
+public Status changeStatus(User user, Integer requestId, Status status) {
+
+    ToRequest request = requestRepository.findById(requestId)
+            .orElseThrow(() -> new RequestNotFundException("Request Not Found: " + requestId));
+
+    if (!request.getWorker().equals(user) && !request.getClient().equals(user)) {
+        throw new ErrorInWorkerToRequestException("User is not authorized to change the status of this request.");
+    }
+
+    // ----- (Client)
+    if (user.equals(request.getClient())) {
+        if (status.equals("CANCEL") && request.getStatus().equals("PENDING")) {
+            request.setStatus(status);
+        } else {
+            throw new ErrorInTheCaseException("Invalid status transition for client.");
+        }
+    }
+
+    //  (Worker)
+    if (user.equals(request.getWorker())) {
+
+
+        if (request.getStatus().equals("PENDING") && (status.equals("APPROVED") || status.equals("REJECTED") || status.equals("COMPLETED"))) {
+
+            request.setStatus(status);
+
+        } else if (request.getStatus().equals("APPROVED") && (status.equals("REJECTED") || status.equals("COMPLETED"))) {
+
+            request.setStatus(status);
+
+        } else if (request.getStatus().equals("REJECTED") && status.equals("COMPLETED")) {
+
+            request.setStatus(status);
+
+        } else {
+
+            throw new ErrorInTheCaseException("Invalid status transition for worker.");
+
+        }
+    }
+
+    requestRepository.save(request);
+
+    return status;
+}
+
+
+
 
 }

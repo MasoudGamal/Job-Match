@@ -10,10 +10,16 @@ import org.springdemo.serviceproviders.basics.worker.service.WorkerService;
 import org.springdemo.serviceproviders.job.dtos.JobResponse;
 import org.springdemo.serviceproviders.otp.entity.Otp;
 import org.springdemo.serviceproviders.otp.entity.exception.OtpNotFundException;
+import org.springdemo.serviceproviders.toRequest.dtos.Response;
+import org.springdemo.serviceproviders.toRequest.entity.ToRequest;
+import org.springdemo.serviceproviders.toRequest.enums.Status;
+import org.springdemo.serviceproviders.toRequest.exception.RequestNotFundException;
+import org.springdemo.serviceproviders.toRequest.exception.RequestsAreEmptyException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -66,18 +72,27 @@ public class WorkerController {
 
 
 
-//    @PostMapping("phone")
-//    public void phoneNumber(@RequestParam String phoneNumber
-//                           ,@AuthenticationPrincipal Worker worker){
-//
-//        workerService.phoneNumber(phoneNumber , worker);
-//    }
-//
-//
-//    @PostMapping("otp")
-//    public String Verification(@RequestParam String otp
-//            ,@AuthenticationPrincipal Worker worker){
-//
-//       return workerService.Verification(otp, worker);
-//    }
+    @GetMapping("request")
+    public List<Response> findAllRequestByWorker(@AuthenticationPrincipal Worker worker){
+
+        return workerService.findAllRequestByWorker(worker);
+
+    }
+
+    @PutMapping("status/{id}")
+    public Status changeStatus(@RequestParam Status status ,@PathVariable Integer id){
+
+       return workerService.changeStatus(status, id);
+
+
+    }
+
+
+    @GetMapping("status")
+    public List<Response> findAllByStatus(@RequestBody Status status
+                                          ,@AuthenticationPrincipal Worker worker){
+
+        return workerService.findAllByStatus(status, worker);
+
+    }
 }

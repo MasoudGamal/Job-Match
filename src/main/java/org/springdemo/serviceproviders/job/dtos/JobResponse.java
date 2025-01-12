@@ -5,9 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springdemo.serviceproviders.basics.worker.dto.WorkerResponse;
-import org.springdemo.serviceproviders.basics.worker.entity.Worker;
-import org.springdemo.serviceproviders.categores.dtos.CategoryResponse;
-import org.springdemo.serviceproviders.categores.entity.Category;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Getter
@@ -23,6 +23,8 @@ public class JobResponse {
     private Double price;
 
     private WorkerResponse workerResponse;
+
+    private List<String> imagePaths = new ArrayList<>();
 
 
 }

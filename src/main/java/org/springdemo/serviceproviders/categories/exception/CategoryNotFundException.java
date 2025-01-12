@@ -1,4 +1,4 @@
-package org.springdemo.serviceproviders.categores.exception;
+package org.springdemo.serviceproviders.categories.exception;
 
 public class CategoryNotFundException extends RuntimeException {
     public CategoryNotFundException(String message) {

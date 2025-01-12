@@ -23,15 +23,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OtpService {
 
-    private final JobRepository jobRepository;
-
-    private  final JobMapper jobMapper;
-
-    private final OtpRepository otpRepository ;
-    private final WorkerRepository workerRepository;
-
-
-
     public String generateOTP() {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
         SecureRandom secureRandom = new SecureRandom();
@@ -42,12 +33,5 @@ public class OtpService {
         }
         return otp.toString();
     }
-
-
-
-
-//    -----------------------------------------------------------------
-
-
 
 }

@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.File;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -26,4 +28,5 @@ public class ClientRequest {
     private String role;
     @NotBlank
     private String address;
+
 }
