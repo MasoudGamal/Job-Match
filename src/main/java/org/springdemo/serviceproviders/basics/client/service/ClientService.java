@@ -136,51 +136,7 @@ public class ClientService {
 //
 //
 //    }
-public Status changeStatus(User user, Integer requestId, Status status) {
 
-    ToRequest request = requestRepository.findById(requestId)
-            .orElseThrow(() -> new RequestNotFundException("Request Not Found: " + requestId));
-
-    if (!request.getWorker().equals(user) && !request.getClient().equals(user)) {
-        throw new ErrorInWorkerToRequestException("User is not authorized to change the status of this request.");
-    }
-
-    // ----- (Client)
-    if (user.equals(request.getClient())) {
-        if (status.equals("CANCEL") && request.getStatus().equals("PENDING")) {
-            request.setStatus(status);
-        } else {
-            throw new ErrorInTheCaseException("Invalid status transition for client.");
-        }
-    }
-
-    //  (Worker)
-    if (user.equals(request.getWorker())) {
-
-
-        if (request.getStatus().equals("PENDING") && (status.equals("APPROVED") || status.equals("REJECTED") || status.equals("COMPLETED"))) {
-
-            request.setStatus(status);
-
-        } else if (request.getStatus().equals("APPROVED") && (status.equals("REJECTED") || status.equals("COMPLETED"))) {
-
-            request.setStatus(status);
-
-        } else if (request.getStatus().equals("REJECTED") && status.equals("COMPLETED")) {
-
-            request.setStatus(status);
-
-        } else {
-
-            throw new ErrorInTheCaseException("Invalid status transition for worker.");
-
-        }
-    }
-
-    requestRepository.save(request);
-
-    return status;
-}
 
 
 

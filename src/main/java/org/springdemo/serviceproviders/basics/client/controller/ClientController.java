@@ -71,14 +71,5 @@ public class ClientController {
 
 
 
-    @PutMapping("status")
-    @PreAuthorize("hasAnyAuthority('CLIENT' , 'WORKER')")
-    public Status changeStatus(@RequestBody Status status ,
-                               @AuthenticationPrincipal User user ,
-                               @RequestBody Integer requestId){
 
-        return clientService.changeStatus(user, requestId, status);
-
-
-    }
 }
