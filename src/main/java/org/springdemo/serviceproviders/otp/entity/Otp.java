@@ -2,7 +2,7 @@ package org.springdemo.serviceproviders.otp.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springdemo.serviceproviders.basics.user.entity.User;
+import org.springdemo.serviceproviders.uaer.user1.entity.User;
 
 @Entity
 @Getter

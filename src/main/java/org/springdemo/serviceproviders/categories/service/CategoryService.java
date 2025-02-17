@@ -1,8 +1,8 @@
 package org.springdemo.serviceproviders.categories.service;
 
 import lombok.RequiredArgsConstructor;
-import org.springdemo.serviceproviders.basics.worker.mapper.WorkerMapper;
-import org.springdemo.serviceproviders.basics.worker.repository.WorkerRepository;
+import org.springdemo.serviceproviders.uaer.user1.worker.mapper.WorkerMapper;
+import org.springdemo.serviceproviders.uaer.user1.worker.repository.WorkerRepository;
 import org.springdemo.serviceproviders.categories.dtos.CategoryRequest;
 import org.springdemo.serviceproviders.categories.dtos.CategoryResponse;
 import org.springdemo.serviceproviders.categories.entity.Category;

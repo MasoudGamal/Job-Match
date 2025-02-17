@@ -15,7 +15,7 @@ public class FirebaseInitializer {
     @PostConstruct
     public void initialize() {
         try {
-            // حدد مسار ملف التهيئة
+            // تحدد مسار ملف التهيئة
             FileInputStream serviceAccount =
                     new FileInputStream("src/main/resources/serviceAccountKey.json");
 

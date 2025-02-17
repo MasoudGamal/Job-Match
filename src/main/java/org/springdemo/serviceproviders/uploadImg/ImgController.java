@@ -18,7 +18,7 @@ public class ImgController {
 
     @PostMapping
     public Job uploadJobImages(@RequestParam Integer id
-                                    , @RequestParam("files") List<MultipartFile> files) throws IOException {
+                                    , @RequestParam("files") List<MultipartFile> files) {
 
 
         return imgService.uploadJobImages(id , files);

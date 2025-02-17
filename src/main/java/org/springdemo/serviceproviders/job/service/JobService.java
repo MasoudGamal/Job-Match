@@ -1,16 +1,13 @@
 package org.springdemo.serviceproviders.job.service;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springdemo.serviceproviders.basics.worker.dto.WorkerResponse;
-import org.springdemo.serviceproviders.basics.worker.entity.Worker;
-import org.springdemo.serviceproviders.basics.worker.exception.CheckTheWorkerException;
-import org.springdemo.serviceproviders.basics.worker.mapper.WorkerMapper;
-import org.springdemo.serviceproviders.basics.worker.repository.WorkerRepository;
+import org.springdemo.serviceproviders.uaer.user1.worker.entity.Worker;
+import org.springdemo.serviceproviders.uaer.user1.worker.exception.CheckTheWorkerException;
+import org.springdemo.serviceproviders.uaer.user1.worker.mapper.WorkerMapper;
+import org.springdemo.serviceproviders.uaer.user1.worker.repository.WorkerRepository;
 import org.springdemo.serviceproviders.job.dtos.JobRequest;
 import org.springdemo.serviceproviders.job.dtos.JobResponse;
 import org.springdemo.serviceproviders.job.entity.Job;
-import org.springdemo.serviceproviders.job.exception.JobAlreadyExistException;
 import org.springdemo.serviceproviders.job.exception.JobNotFundException;
 import org.springdemo.serviceproviders.job.exception.JobsAreEmptyException;
 import org.springdemo.serviceproviders.job.mapper.JobMapper;

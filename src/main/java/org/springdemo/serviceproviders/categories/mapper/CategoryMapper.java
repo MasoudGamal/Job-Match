@@ -1,7 +1,7 @@
 package org.springdemo.serviceproviders.categories.mapper;
 
 import lombok.RequiredArgsConstructor;
-import org.springdemo.serviceproviders.basics.user.repository.UserRepository;
+import org.springdemo.serviceproviders.uaer.user1.repository.UserRepository;
 import org.springdemo.serviceproviders.categories.dtos.CategoryRequest;
 import org.springdemo.serviceproviders.categories.dtos.CategoryResponse;
 import org.springdemo.serviceproviders.categories.entity.Category;

@@ -1,8 +1,8 @@
 package org.springdemo.serviceproviders.job.mapper;
 
 import lombok.RequiredArgsConstructor;
-import org.springdemo.serviceproviders.basics.user.repository.UserRepository;
-import org.springdemo.serviceproviders.basics.worker.mapper.WorkerMapper;
+import org.springdemo.serviceproviders.uaer.user1.repository.UserRepository;
+import org.springdemo.serviceproviders.uaer.user1.worker.mapper.WorkerMapper;
 import org.springdemo.serviceproviders.categories.entity.Category;
 import org.springdemo.serviceproviders.categories.exception.CategoryNotFundException;
 import org.springdemo.serviceproviders.categories.repository.CategoryRepository;

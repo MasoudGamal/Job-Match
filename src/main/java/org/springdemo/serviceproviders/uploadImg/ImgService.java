@@ -1,16 +1,10 @@
 package org.springdemo.serviceproviders.uploadImg;
 
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-import org.springdemo.serviceproviders.basics.user.exception.WorkerNotFundException;
-import org.springdemo.serviceproviders.basics.user.repository.UserRepository;
-import org.springdemo.serviceproviders.basics.worker.entity.Worker;
-import org.springdemo.serviceproviders.basics.worker.repository.WorkerRepository;
 import org.springdemo.serviceproviders.job.entity.Job;
 import org.springdemo.serviceproviders.job.exception.JobNotFundException;
 import org.springdemo.serviceproviders.job.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,7 +15,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
