@@ -11,8 +11,8 @@
     <groupId>org.springdemo</groupId>
     <artifactId>Job Match</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>service providers</name>
-    <description>service providers</description>
+    <name>Job Match</name>
+    <description>Job Match</description>
     <url/>
     <licenses>
         <license/>
@@ -125,12 +125,6 @@
             <artifactId>jjwt-jackson</artifactId>
             <version>0.11.5</version>
         </dependency>
-        <dependency>
-            <groupId>org.springdemo</groupId>
-            <artifactId>serviceProviders</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
     </dependencies>
 
     <build>
