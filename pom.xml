@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.springdemo</groupId>
-    <artifactId>serviceProviders</artifactId>
+    <artifactId>Job Match</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>service providers</name>
     <description>service providers</description>
